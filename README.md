@@ -81,6 +81,20 @@ the site repo); nobody edits the site copy by hand.
    and byte-for-byte equality with the live skipcalls.com files and index
    digests. A red run means the site and this repo have drifted.
 
+## MCP Registry
+
+The server is listed in the official MCP Registry as `com.skipcalls/skipcalls`
+(https://registry.modelcontextprotocol.io/v0/servers?search=com.skipcalls).
+[`registry/server.json`](registry/server.json) is the published manifest. To
+publish a new version, bump `version` and run from `registry/`:
+
+```bash
+mcp-publisher login http --domain skipcalls.com --private-key "$(openssl pkey -in ~/.secrets/skipcalls-mcp-registry-ed25519.pem -outform DER | tail -c 32 | xxd -p -c 64)"
+mcp-publisher publish
+```
+
+The matching public key is served at `https://skipcalls.com/.well-known/mcp-registry-auth`.
+
 ## Support
 
 team@skipcalls.com · https://app.skipcalls.com/support
